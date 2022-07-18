@@ -62,6 +62,9 @@ service NetworkServerService {
     // UpdateDevice updates the given device.
     rpc UpdateDevice(UpdateDeviceRequest) returns (google.protobuf.Empty) {}
 
+    // UpdateDeviceServiceProfile sets service profile for given devices.
+    rpc UpdateDeviceServiceProfile(UpdateDeviceServiceProfileRequest) returns (google.protobuf.Empty) {}
+
     // DeleteDevice deletes the device matching the given DevEUI.
     rpc DeleteDevice(DeleteDeviceRequest) returns (google.protobuf.Empty) {}
 
@@ -345,6 +348,14 @@ message GetDeviceResponse {
 message UpdateDeviceRequest {
     // Device object to update.
     Device device = 1;
+}
+
+message UpdateDeviceServiceProfileRequest {
+    message Device {
+        bytes dev_eui = 1;
+    }
+    repeated Device devices = 1;
+    bytes service_profile_id = 2;
 }
 
 message DeleteDeviceRequest {
